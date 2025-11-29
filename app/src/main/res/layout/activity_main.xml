@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="6dp">
+
+        <!-- Cabeçalho -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Truco"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textColor="#2E7D32"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Botão Reset -->
+        <Button
+            android:id="@+id/btnReset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🔄 Novo Jogo"
+            android:backgroundTint="#FF9800"
+            android:padding="12dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"/>
+
+        <!-- Container das Duplas -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <!-- Dupla 1 -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:padding="6dp"
+                android:layout_marginEnd="3dp"
+                android:elevation="2dp">
+
+                <!-- Nome com botão editar -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:background="@drawable/bg_dupla1"
+                    android:layout_marginBottom="12dp">
+
+                    <TextView
+                        android:id="@+id/dupla1Name"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Dupla 1"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:textColor="#2196F3"/>
+
+                    <ImageButton
+                        android:id="@+id/btnEditDupla1"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:src="@drawable/ic_edit"
+                        android:background="@drawable/button_rounded"
+                        android:scaleType="centerInside"
+                        android:padding="6dp"
+                        android:contentDescription="Editar Dupla 1"/>
+                </LinearLayout>
+
+                <!-- Pontuação Dupla 1 -->
+                <TextView
+                    android:id="@+id/dupla1Score"
+                    android:layout_width="match_parent"
+                    android:layout_height="140dp"
+                    android:text="0"
+                    android:textSize="82sp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:textColor="#2196F3"
+                    android:background="@drawable/bg_score_dupla1"
+                    android:padding="16dp"
+                    android:layout_marginBottom="26dp"/>
+
+                <!-- Botões com Cartas Dupla 1 -->
+                <ImageButton
+                    android:id="@+id/btnDupla1Add1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_espadilha"
+                    android:scaleType="centerCrop"
+                    android:padding="20dp"
+                    android:layout_marginBottom="16dp"
+                    android:minHeight="70dp"
+                    android:contentDescription="+1 ponto" android:clipToOutline="true"/>
+
+                <ImageButton
+                    android:id="@+id/btnDupla1Add3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_zap"
+                    android:scaleType="centerCrop"
+                    android:padding="20dp"
+                    android:layout_marginBottom="16dp"
+                    android:minHeight="70dp"
+                    android:contentDescription="+3 pontos" android:clipToOutline="true"/>
+
+                <ImageButton
+                    android:id="@+id/btnDupla1Remove"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_minus"
+                    android:scaleType="centerCrop"
+                    android:padding="4dp"
+                    android:minHeight="50dp"
+                    android:contentDescription="-1 ponto"/>
+            </LinearLayout>
+
+            <!-- Dupla 2 -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:padding="6dp"
+                android:layout_marginStart="3dp"
+                android:elevation="20dp">
+
+                <!-- Nome com botão editar -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:background="@drawable/bg_dupla2"
+                    android:layout_marginBottom="12dp">
+
+                    <TextView
+                        android:id="@+id/dupla2Name"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Dupla 2"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:textColor="#F44336"/>
+
+                    <ImageButton
+                        android:id="@+id/btnEditDupla2"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:src="@drawable/ic_edit"
+                        android:background="@drawable/button_rounded"
+                        android:scaleType="centerInside"
+                        android:padding="6dp"
+                        android:contentDescription="Editar Dupla 2"/>
+                </LinearLayout>
+
+                <!-- Pontuação Dupla 2 -->
+                <TextView
+                    android:id="@+id/dupla2Score"
+                    android:layout_width="match_parent"
+                    android:layout_height="140dp"
+                    android:text="0"
+                    android:textSize="82sp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:textColor="#F44336"
+                    android:background="@drawable/bg_score_dupla1"
+                    android:padding="16dp"
+                        android:layout_marginBottom="26dp"/>
+
+                <!-- Botões com Cartas Dupla 2 -->
+                <ImageButton
+                    android:id="@+id/btnDupla2Add1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_espadilha"
+                    android:scaleType="centerCrop"
+                    android:padding="20dp"
+                    android:layout_marginBottom="16dp"
+                    android:minHeight="70dp"
+                    android:contentDescription="+1 ponto" android:clipToOutline="true"/>
+
+                <ImageButton
+                    android:id="@+id/btnDupla2Add3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_zap"
+                    android:scaleType="centerCrop"
+                    android:padding="20dp"
+                    android:layout_marginBottom="16dp"
+                    android:minHeight="70dp"
+                    android:contentDescription="+3 pontos" android:clipToOutline="true"/>
+
+                <ImageButton
+                    android:id="@+id/btnDupla2Remove"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_minus"
+                    android:scaleType="centerCrop"
+                    android:padding="4dp"
+                    android:minHeight="50dp"
+                    android:contentDescription="-1 ponto"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Rodapé com Botão de Compartilhar App -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="16dp"
+            android:layout_marginTop="20dp">
+
+            <Button
+                android:id="@+id/btnShareApp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="📱 Compartilhar App"
+                android:backgroundTint="#25D366"
+                android:textColor="@color/white"
+                android:padding="12dp"
+                android:textSize="16sp"
+                android:contentDescription="Compartilhar aplicativo via WhatsApp"/>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
