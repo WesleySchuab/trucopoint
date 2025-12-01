@@ -13,3 +13,7 @@
 .externalNativeBuild
 .cxx
 local.properties
+testadores.csv
+
+# Arquivos de áudio
+app/src/main/res/raw/

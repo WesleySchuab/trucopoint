@@ -33,6 +33,7 @@ TrucoPoint é um contador de pontos digital desenvolvido para substituir o tradi
 - **Plataforma**: Android (API 29+)
 - **SDK**: Android 14 (API 35)
 - **Arquitetura**: Activity com Shared Preferences para persistência
+- **Áudios**: Gerados via [TTSMaker](https://ttsmaker.com/) - Text-to-Speech com voz brasileira
 
 ## 📋 Requisitos
 
@@ -89,5 +90,27 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 - [ ] Multiplayer online
 
 ---
+Notas da versão  3 (1.2)
+Sistema de Compartilhamento:
 
+📱 Botão para compartilhar o app via WhatsApp
+Link automático para a Play Store
+Mensagem promocional pré-formatada
+🔧 Melhorias Técnicas
+MediaPlayer com gerenciamento adequado de memória
+Sistema de flags para controlar reprodução de áudios
+Áudios armazenados na pasta res/raw/
+📝 Funcionalidades Mantidas da v1.0
+✅ Contador de pontos com botões +1 e +3
+✅ Personalização de nomes das duplas
+✅ Remoção de pontos individualmente
+✅ Detecção automática de vitória aos 12 pontos
+✅ Persistência de dados (pontuação e nomes salvos)
+✅ Botão de reset para nova partida
+🎯 Arquivos de Áudio Necessários
+truco_sound.mp3 - "Parece que vocês têm medo de trucar"
+truco_sound2.mp3 - Áudio especial para 11 pontos
+📋 Requisitos
+Android 10.0 (API 29) ou superior
+~6 MB de espaço disponível (incluindo áudios)
 ⭐ Se você gostou do projeto, deixe uma estrela no repositório!

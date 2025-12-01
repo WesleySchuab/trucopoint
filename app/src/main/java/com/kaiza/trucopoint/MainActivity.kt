@@ -1,6 +1,7 @@
 package com.kaiza.trucopoint
 
 import android.content.Intent
+import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
@@ -19,6 +20,15 @@ class MainActivity : AppCompatActivity() {
     private var maxScore = 12
     private var dupla1Nome = "Nós"
     private var dupla2Nome = "Eles"
+    
+    // Controle de pontos consecutivos de 1
+    private var dupla1ConsecutiveOnes = 0
+    private var dupla2ConsecutiveOnes = 0
+    private var mediaPlayer: MediaPlayer? = null
+    
+    // Controle de áudio aos 11 pontos
+    private var dupla1Played11Sound = false
+    private var dupla2Played11Sound = false
 
     private lateinit var dupla1ScoreText: TextView
     private lateinit var dupla2ScoreText: TextView
@@ -64,9 +74,41 @@ class MainActivity : AppCompatActivity() {
     private fun addPoints(dupla: Int, points: Int) {
         if (dupla == 1) {
             dupla1Score = (dupla1Score + points).coerceAtMost(maxScore)
+            // Rastrear pontos consecutivos de 1
+            if (points == 1) {
+                dupla1ConsecutiveOnes++
+                dupla2ConsecutiveOnes = 0 // Resetar contador da outra dupla
+                if (dupla1ConsecutiveOnes == 4) {
+                    playTrucoSound()
+                    dupla1ConsecutiveOnes = 0
+                }
+            } else {
+                dupla1ConsecutiveOnes = 0
+            }
         } else {
             dupla2Score = (dupla2Score + points).coerceAtMost(maxScore)
+            // Rastrear pontos consecutivos de 1
+            if (points == 1) {
+                dupla2ConsecutiveOnes++
+                dupla1ConsecutiveOnes = 0 // Resetar contador da outra dupla
+                if (dupla2ConsecutiveOnes == 4) {
+                    playTrucoSound()
+                    dupla2ConsecutiveOnes = 0
+                }
+            } else {
+                dupla2ConsecutiveOnes = 0
+            }
         }
+        
+        // Verificar se atingiu 11 pontos para tocar som especial
+        if (dupla == 1 && dupla1Score == 11 && !dupla1Played11Sound) {
+            play11PointsSound()
+            dupla1Played11Sound = true
+        } else if (dupla == 2 && dupla2Score == 11 && !dupla2Played11Sound) {
+            play11PointsSound()
+            dupla2Played11Sound = true
+        }
+        
         saveData()
         updateUI()
         checkGameEnd()
@@ -75,8 +117,18 @@ class MainActivity : AppCompatActivity() {
     private fun removePoint(dupla: Int) {
         if (dupla == 1 && dupla1Score > 0) {
             dupla1Score--
+            dupla1ConsecutiveOnes = 0 // Resetar contador ao remover ponto
+            // Resetar flag de áudio de 11 pontos se voltar abaixo de 11
+            if (dupla1Score < 11) {
+                dupla1Played11Sound = false
+            }
         } else if (dupla == 2 && dupla2Score > 0) {
             dupla2Score--
+            dupla2ConsecutiveOnes = 0 // Resetar contador ao remover ponto
+            // Resetar flag de áudio de 11 pontos se voltar abaixo de 11
+            if (dupla2Score < 11) {
+                dupla2Played11Sound = false
+            }
         }
         saveData()
         updateUI()
@@ -100,7 +152,7 @@ class MainActivity : AppCompatActivity() {
     private fun showGameEndDialog(vencedor: String) {
         AlertDialog.Builder(this)
             .setTitle("Fim de Jogo!")
-            .setMessage("vencedor venceu!")
+            .setMessage("$vencedor venceu!")
             .setPositiveButton("Nova Partida") { _, _ -> resetGame() }
             .setCancelable(false)
             .show()
@@ -109,8 +161,50 @@ class MainActivity : AppCompatActivity() {
     private fun resetGame() {
         dupla1Score = 0
         dupla2Score = 0
+        dupla1ConsecutiveOnes = 0
+        dupla2ConsecutiveOnes = 0
+        dupla1Played11Sound = false
+        dupla2Played11Sound = false
         saveData()
         updateUI()
+    }
+    
+    private fun playTrucoSound() {
+        try {
+            // Liberar MediaPlayer anterior se existir
+            mediaPlayer?.release()
+            
+            // Criar novo MediaPlayer com o áudio
+            mediaPlayer = MediaPlayer.create(this, R.raw.truco_sound)
+            mediaPlayer?.setOnCompletionListener {
+                it.release()
+            }
+            mediaPlayer?.start()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+    
+    private fun play11PointsSound() {
+        try {
+            // Liberar MediaPlayer anterior se existir
+            mediaPlayer?.release()
+            
+            // Criar novo MediaPlayer com o áudio de 11 pontos
+            mediaPlayer = MediaPlayer.create(this, R.raw.truco_sound2)
+            mediaPlayer?.setOnCompletionListener {
+                it.release()
+            }
+            mediaPlayer?.start()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+    
+    override fun onDestroy() {
+        super.onDestroy()
+        mediaPlayer?.release()
+        mediaPlayer = null
     }
 
     private fun showEditDupla1Dialog() {
